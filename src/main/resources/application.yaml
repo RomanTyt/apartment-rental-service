@@ -1,0 +1,22 @@
+#server:
+#  port: 8081
+
+spring:
+  liquibase:
+    enabled: false
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./.h2/ApartmentDB;AUTO_SERVER=true;
+    username: admin
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+  h2:
+    console:
+      enabled: true
