@@ -1,0 +1,14 @@
+databaseChangeLog:
+  #Схема
+  - include:
+      file: db/changelog/schema/create-schema-apartment.sql
+  #Таблицы
+  - include:
+      file: db/changelog/changeset/create-rules-of-accommodation-table.sql
+  - include:
+      file: db/changelog/changeset/create-address-table.sql
+  - include:
+      file: db/changelog/changeset/create-apartment-table.sql
+  - include:
+      file: db/changelog/changeset/create-building-parameters-table.sql
+

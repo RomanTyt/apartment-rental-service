@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "address")
+@Table(name = "ADDRESS")
 @Setter
 @Getter
 @NoArgsConstructor
@@ -18,8 +18,9 @@ import java.util.UUID;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "address_id", unique = true)
+    @Column(name = "ADDRESS_ID")
     private UUID addressId;
+    private String oblast;
     private String city;
     private String street;
     private String houseNumber;
@@ -38,6 +39,7 @@ public class Address {
 
         Address address = (Address) o;
 
+        if (!oblast.equals(address.oblast)) return false;
         if (!city.equals(address.city)) return false;
         if (!street.equals(address.street)) return false;
         return houseNumber.equals(address.houseNumber);
@@ -45,7 +47,8 @@ public class Address {
 
     @Override
     public int hashCode() {
-        int result = city.hashCode();
+        int result = oblast.hashCode();
+        result = 31 * result + city.hashCode();
         result = 31 * result + street.hashCode();
         result = 31 * result + houseNumber.hashCode();
         return result;

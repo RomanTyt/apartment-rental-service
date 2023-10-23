@@ -20,20 +20,20 @@ public class ApartmentController {
 
     @PostMapping
     @Operation(summary = "Добавить квартиру")
-    public Apartment addApartment(@RequestBody ApartmentCreateDTO apartmentCreateDTO){
-        return service.addApartment(apartmentCreateDTO);
+    public Apartment addApartment(@RequestBody ApartmentDTO apartmentDTO){
+        return service.addApartment(apartmentDTO);
     }
 
     @GetMapping("/{apartmentId}")
     @Operation(summary = "Получить квартиру по id")
-    public ApartmentGetDTO getApartment(@PathVariable UUID apartmentId){
+    public ApartmentDTO getApartment(@PathVariable UUID apartmentId){
         return service.getApartment(apartmentId);
     }
 
     @PatchMapping("/{apartmentId}")
     @Operation(summary = "Изменить квартиру по id")
-    public ApartmentGetDTO updateApartment(ApartmentUpdateDTO apartmentUpdateDTO, @PathVariable UUID apartmentId){
-        return service.updateApartment(apartmentUpdateDTO, apartmentId);
+    public ApartmentDTO updateApartment(ApartmentDTO apartmentDTO, @PathVariable UUID apartmentId){
+        return service.updateApartment(apartmentDTO, apartmentId);
     }
 
     @DeleteMapping("/{apartmentId}")
@@ -44,19 +44,19 @@ public class ApartmentController {
 
     @PostMapping("/{apartmentId}/rulesOfAccommodation")
     @Operation(summary = "Добавить правила проживания")
-    public String addRulesOfAccommodation(RulesOfAccommodationCreateDTO rulesOfAccommodationCreateDTO, @PathVariable UUID apartmentId){
-        return service.addRulesOfAccommodation(rulesOfAccommodationCreateDTO, apartmentId);
+    public String addRulesOfAccommodation(RulesOfAccommodationDTO rulesOfAccommodationDTO, @PathVariable UUID apartmentId){
+        return service.addRulesOfAccommodation(rulesOfAccommodationDTO, apartmentId);
     }
 
     @PostMapping("/{addressId}/buildingParameters")
     @Operation(summary = "Добавить параметры здания")
-    public String addBuildingParameters(BuildingParametersCreateDTO buildingParametersCreateDTO, @PathVariable UUID addressId){
-        return service.addBuildingParameters(buildingParametersCreateDTO, addressId);
+    public String addBuildingParameters(BuildingParametersDTO buildingParametersDTO, @PathVariable UUID addressId){
+        return service.addBuildingParameters(buildingParametersDTO, addressId);
     }
 
     @PostMapping("/{apartmentId}/addAddress")
     @Operation(summary = "Добавить адрес по id квартиры")
-    public String addAddress(AddressCreateDTO addressCreateDTO, @PathVariable UUID apartmentId){
-        return service.addAddress(addressCreateDTO, apartmentId);
+    public String addAddress(AddressDTO addressDTO, @PathVariable UUID apartmentId){
+        return service.addAddress(addressDTO, apartmentId);
     }
 }
