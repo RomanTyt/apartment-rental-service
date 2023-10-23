@@ -41,20 +41,20 @@ public class ApartmentService {
         this.addressMapper = addressMapper;
     }
 
-    public Apartment addApartment(ApartmentCreateDTO apartmentCreateDTO){
-        return apartmentRepository.save(apartmentMapper.apartmentDTOMapToApartment(apartmentCreateDTO));
+    public Apartment addApartment(ApartmentDTO apartmentDTO){
+        return apartmentRepository.save(apartmentMapper.apartmentDTOMapToApartment(apartmentDTO));
     }
 
-    public ApartmentGetDTO getApartment(UUID apartmentId){
+    public ApartmentDTO getApartment(UUID apartmentId){
         Apartment apartment = apartmentRepository.findById(apartmentId).orElseThrow();
-        return apartmentMapper.apartmentMapToApartmentGetDTO(apartment);
+        return apartmentMapper.apartmentMapToApartmentDTO(apartment);
     }
 
-    public ApartmentGetDTO updateApartment(ApartmentUpdateDTO apartmentUpdateDTO, UUID apartmentId){
+    public ApartmentDTO updateApartment(ApartmentDTO apartmentDTO, UUID apartmentId){
         Apartment apartment = apartmentRepository.findById(apartmentId).orElseThrow();
-        apartmentMapper.updateApartment(apartmentUpdateDTO, apartment);
+        apartmentMapper.updateApartment(apartmentDTO, apartment);
         Apartment save = apartmentRepository.save(apartment);
-        return apartmentMapper.apartmentMapToApartmentGetDTO(save);
+        return apartmentMapper.apartmentMapToApartmentDTO(save);
     }
 
     public String deleteApartment(UUID apartmentId){
@@ -66,8 +66,8 @@ public class ApartmentService {
         return "Квартира удалена";
     }
 
-    public String addRulesOfAccommodation(RulesOfAccommodationCreateDTO rulesOfAccommodationCreateDTO, UUID apartmentId){
-        RulesOfAccommodation rulesOfAccommodation = rulesOfAccommodationMapper.rulesOfAccommodationDTOMapToRulesOfAccommodation(rulesOfAccommodationCreateDTO);
+    public String addRulesOfAccommodation(RulesOfAccommodationDTO rulesOfAccommodationDTO, UUID apartmentId){
+        RulesOfAccommodation rulesOfAccommodation = rulesOfAccommodationMapper.rulesOfAccommodationDTOMapToRulesOfAccommodation(rulesOfAccommodationDTO);
         Apartment apartment = apartmentRepository.findById(apartmentId).orElseThrow();
         if (apartment.getRulesOfAccommodation() != null){
             return "Правила проживания для этой квартиры уже есть в БД";
@@ -76,27 +76,27 @@ public class ApartmentService {
         return "Правила проживания для этой квартиры добавлены в БД. Id: " + rulesOfAccommodationRepository.save(rulesOfAccommodation).getRulesOfAccommodationId().toString();
     }
 
-    public String addBuildingParameters(BuildingParametersCreateDTO buildingParametersCreateDTO, UUID addressId){
+    public String addBuildingParameters(BuildingParametersDTO buildingParametersDTO, UUID addressId){
         Address address = addressRepository.findById(addressId).orElseThrow();
         if (address.getBuildingParameters() != null){
             return "Параметры этого здания уже есть в БД";
         }
-        BuildingParameters buildingParameters = buildingParametersMapper.buildingParametersDTOMapToBuildingParameters(buildingParametersCreateDTO);
+        BuildingParameters buildingParameters = buildingParametersMapper.buildingParametersDTOMapToBuildingParameters(buildingParametersDTO);
         buildingParameters.setAddress(address);
         return "Параметры здания добавлены в БД. Id: " + buildingParametersRepository.save(buildingParameters).getBuildingId().toString();
     }
 
-    public String addAddress(AddressCreateDTO addressCreateDTO, UUID apartmentId){
+    public String addAddress(AddressDTO addressDTO, UUID apartmentId){
         Apartment apartment = apartmentRepository.findById(apartmentId).orElseThrow();
         if (apartment.getAddress() != null) {
             return "У этой квартиры уже есть адрес";
         }
-        if (addressRepository.existsByHashCode(addressCreateDTO.hashCode())){
-            Address byHashCode = addressRepository.findByHashCode(addressCreateDTO.hashCode());
+        if (addressRepository.existsByHashCode(addressDTO.hashCode())){
+            Address byHashCode = addressRepository.findByHashCode(addressDTO.hashCode());
             apartment.setAddress(byHashCode);
             return "Адрес присвоен квартире, но он уже был в БД. Id: " + byHashCode.getAddressId().toString();
         }
-        Address address = addressMapper.addressDTOMapToAddress(addressCreateDTO);
+        Address address = addressMapper.addressDTOMapToAddress(addressDTO);
         address.setHashCode(address.hashCode());
         apartment.setAddress(address);
         return "Новый адрес добавлен в БД и присвоен квартире. Id: " + addressRepository.save(address).getAddressId().toString();

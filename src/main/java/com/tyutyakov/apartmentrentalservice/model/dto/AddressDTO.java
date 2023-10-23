@@ -1,14 +1,13 @@
 package com.tyutyakov.apartmentrentalservice.model.dto;
 
-import com.tyutyakov.apartmentrentalservice.model.entity.Address;
 import lombok.*;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-//@EqualsAndHashCode
-public class AddressCreateDTO {
+public class AddressDTO {
+    private String oblast;
     private String city;
     private String street;
     private String houseNumber;
@@ -18,8 +17,9 @@ public class AddressCreateDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AddressCreateDTO that = (AddressCreateDTO) o;
+        AddressDTO that = (AddressDTO) o;
 
+        if (!oblast.equals(that.oblast)) return false;
         if (!city.equals(that.city)) return false;
         if (!street.equals(that.street)) return false;
         return houseNumber.equals(that.houseNumber);
@@ -27,7 +27,8 @@ public class AddressCreateDTO {
 
     @Override
     public int hashCode() {
-        int result = city.hashCode();
+        int result = oblast.hashCode();
+        result = 31 * result + city.hashCode();
         result = 31 * result + street.hashCode();
         result = 31 * result + houseNumber.hashCode();
         return result;

@@ -6,7 +6,7 @@ import lombok.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "building_parameters")
+@Table(name = "BUILDING_PARAMETERS")
 @Setter
 @Getter
 @NoArgsConstructor
@@ -15,16 +15,16 @@ import java.util.UUID;
 public class BuildingParameters {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "building_id")
+    @Column(name = "BUILDING_ID")
     private UUID buildingId;
     private String houseType;                   // Тип дома: монолитный / кирпичный и тд
-    private int yearOfConstruction;             // Год постройки
-    private int floorsInTheHouse;               // Этажей в доме
-    private int passengerElevatorQuantity ;     // Пассажирский лифт количество
-    private int freightElevatorQuantity ;       // Грузовой лифт количество
+    private short yearOfConstruction;           // Год постройки
+    private short floorsInTheHouse;             // Этажей в доме
+    private short passengerElevatorQuantity;    // Пассажирский лифт количество
+    private short freightElevatorQuantity ;     // Грузовой лифт количество
     private String parkingSpace;                // Парковка описание
 
     @OneToOne
-    @JoinColumn(name = "address_id")
+    @JoinColumn(name = "ADDRESS_ID")
     private Address address;
 }
