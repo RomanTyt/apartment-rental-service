@@ -6,7 +6,7 @@ import lombok.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "apartment")
+@Table(name = "APARTMENT")
 @Setter
 @Getter
 @NoArgsConstructor
@@ -15,22 +15,22 @@ import java.util.UUID;
 public class Apartment {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "apartment_id")
+    @Column(name = "APARTMENT_ID")
     private UUID apartmentId;
-    private int numberOfRooms;              // Количество комнат
-    private double totalArea;               // Общая площадь
-    private double kitchenArea;             // Площадь кухни
-    private int floor;                      // Этаж
+    private short numberOfRooms;            // Количество комнат
+    private float totalArea;                // Общая площадь
+    private float kitchenArea;              // Площадь кухни
+    private short floor;                    // Этаж
     private String bathroom;                // Санузел совмещённый/раздельный
     private String furniture;               // Мебель перечисление
     private String appliances;              // Бытовая техника перечисление
     private String apartmentDescription;    // Описание квартиры в свободной форме
 
     @ManyToOne
-    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
+    @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ADDRESS_ID")
     private Address address;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "rules_Of_Accommodation_id")
+    @JoinColumn(name = "RULES_OF_ACCOMMODATION_ID")
     private RulesOfAccommodation rulesOfAccommodation;
 }
