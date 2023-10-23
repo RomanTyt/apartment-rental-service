@@ -12,6 +12,6 @@ create table if not exists APARTMENT.APARTMENT
     FURNITURE                       varchar(300),
     APPLIANCES                      varchar(300),
     APARTMENT_DESCRIPTION           varchar(2000),
-    ADDRESS_ID                      UUID            unique    references ADDRESS(ADDRESS_ID),
-    RULES_OF_ACCOMMODATION_ID       UUID            unique    references RULES_OF_ACCOMMODATION(RULES_OF_ACCOMMODATION_ID)
+    ADDRESS_ID                      UUID            unique    references APARTMENT.ADDRESS (ADDRESS_ID),
+    RULES_OF_ACCOMMODATION_ID       UUID            unique    references APARTMENT.RULES_OF_ACCOMMODATION(RULES_OF_ACCOMMODATION_ID)
 )

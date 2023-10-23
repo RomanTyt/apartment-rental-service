@@ -10,5 +10,5 @@ databaseChangeLog:
   - include:
       file: db/changelog/changeset/create-apartment-table.sql
   - include:
-      file: db/changelog/changeset/create-building-parametrs-table.sql
+      file: db/changelog/changeset/create-building-parameters-table.sql
 

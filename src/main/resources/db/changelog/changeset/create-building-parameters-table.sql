@@ -10,5 +10,5 @@ create table if not exists APARTMENT.BUILDING_PARAMETERS
     PASSENGER_ELEVATOR_QUANTITY smallint        not null,
     FREIGHT_ELEVATOR_QUANTITY   smallint        not null,
     PARKING_SPACE               varchar(200)    not null,
-    ADDRESS_ID                  UUID            unique      references ADDRESS(ADDRESS_ID)
+    ADDRESS_ID                  UUID            unique      references APARTMENT.ADDRESS(ADDRESS_ID)
 )
